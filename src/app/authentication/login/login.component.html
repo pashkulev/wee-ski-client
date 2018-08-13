@@ -1,0 +1,67 @@
+<div class="row login-page">
+  <form [formGroup]="loginForm" (ngSubmit)="login()" class="col-12 py-5">
+    <div class="row">
+      <h2 class="offset-1 offset-sm-3 col-10 col-sm-6 mb-3 login-header shadow">Login Form</h2>
+    </div>
+    <div class="row mb-3">
+      <div class="col-1 col-sm-3 text-right pt-3">
+        <i class="material-icons">email</i>
+      </div>
+      <mat-form-field class="col-10 col-sm-6">
+        <input id="email"
+               matInput
+               formControlName="email"
+               placeholder="Enter your email"/>
+        <button mat-button
+                *ngIf="email.dirty && email.value.length > 0"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="email.reset()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="email.invalid && email.hasError('required')">
+          Email is required
+        </mat-error>
+        <mat-error *ngIf="email.invalid && !email.hasError('required') && email.dirty">
+          Please enter a valid email address
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <div class="col-1 col-sm-3 text-right pt-3">
+        <mat-icon id="passwordVisibilityIcon" matSuffix (click)="passwordHidden = !passwordHidden">
+          {{passwordHidden ? 'visibility' : 'visibility_off'}}
+        </mat-icon>
+      </div>
+      <mat-form-field class="col-10 col-sm-6">
+        <input id="password"
+               [type]="passwordHidden ? 'password' : 'text'"
+               matInput
+               formControlName="password"
+               placeholder="Enter your password"/>
+        <button mat-button
+                *ngIf="password.dirty && password.value.length > 0"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="password.reset()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="password.invalid && password.hasError('required')">
+          Password is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <div class="offset-1 offset-sm-3 col-10 col-sm-6 text-right">
+        <button type="submit" id="login-btn" class="custom-btn"  mat-stroked-button>Login</button>
+        <button type="button" id="register-btn" class="custom-btn" mat-stroked-button routerLink="/register">
+          Register
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

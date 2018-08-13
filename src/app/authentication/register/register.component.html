@@ -1,0 +1,217 @@
+<div class="row register-page p-sm-4 p-md-5">
+  <form [formGroup]="registerForm" (ngSubmit)="register()" class="col-12 py-5 rounded">
+
+    <div class="row">
+      <h2 class="offset-1 offset-sm-3 col-10 col-sm-6 mb-3 register-header shadow">Register Form</h2>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-1 col-sm-3 text-right pt-3">
+        <i class="material-icons"
+           [style.color]="firstName.value.length > 1 && firstName.valid ? 'green' : 'black'">
+          person
+        </i>
+      </div>
+      <mat-form-field class="col-10 col-sm-6">
+        <input id="firstName"
+               matInput
+               formControlName="firstName"
+               placeholder="Enter your first name"/>
+        <button mat-button
+                *ngIf="firstName.dirty && firstName.value.length > 0"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="resetFirstName()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="firstName.invalid && firstName.value.length > 0">
+          First name should start with capital letter followed by 1 or more lowercase english letters!
+        </mat-error>
+        <mat-hint *ngIf="firstName.value.length === 0" class="hint">
+           First name should start with a capital letter followed by 1 or more lowercase english letters!
+        </mat-hint>
+        <mat-hint *ngIf="firstName.value.length > 1 && firstName.valid" class="hint-success">
+          First name is valid!
+        </mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-1 col-sm-3 text-right pt-3">
+        <i class="material-icons"
+           [style.color]="lastName.value.length > 1 && lastName.valid ? 'green' : 'black'">
+          person
+        </i>
+      </div>
+      <mat-form-field class="col-10 col-sm-6">
+        <input id="lastName"
+               matInput
+               formControlName="lastName"
+               placeholder="Enter your last name"/>
+        <button mat-button
+                *ngIf="lastName.dirty && lastName.value.length > 0"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="resetLastName()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="lastName.invalid && lastName.value.length > 0">
+          Last name should start with a capital letter followed by 1 or more english letters!
+          (it may also contain a separating space e.g. 'Mc Kinley')
+        </mat-error>
+        <mat-hint *ngIf="lastName.value.length === 0" class="hint">
+          Last name should start with a capital letter followed by 1 or more english letters!
+          (it may also contain a separating space e.g. 'Mc Kinley')
+        </mat-hint>
+        <mat-hint *ngIf="lastName.value.length > 1 && lastName.valid" class="hint-success">
+          Last name is valid!
+        </mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-1 col-sm-3 text-right pt-3">
+        <i class="material-icons" [style.color]="email.valid ? 'green' : 'black'">email</i>
+      </div>
+      <mat-form-field class="col-10 col-sm-6">
+        <input id="email"
+               matInput
+               formControlName="email"
+               placeholder="Enter your email" required/>
+        <button mat-button
+                *ngIf="email.dirty && email.value.length > 0"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="email.reset()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="email.invalid && email.hasError('required')">
+          Email is required
+        </mat-error>
+        <mat-error *ngIf="email.invalid && !email.hasError('required') && email.dirty">
+          Please enter a valid email address
+        </mat-error>
+        <mat-hint *ngIf="email.valid" class="hint-success">
+          E-mail is valid!
+        </mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="row my-3">
+      <div class="col-1 col-sm-3 text-right">
+        <i class="material-icons" [style.color]="country.value ? 'green' : 'black'">public</i>
+      </div>
+      <mat-form-field class="col-10 col-sm-6">
+        <mat-select placeholder="Select Country" panelClass="country-menu" formControlName="country">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let c of countries" [value]="c">{{c}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="row my-4">
+      <div class="col-1 col-sm-3 text-right">
+        <i class="material-icons" [style.color]="selectedImage ? 'green' : 'black'">add_a_photo</i>
+      </div>
+      <div class="col-10 col-sm-6">
+        <div class="mb-2">
+          <button id="selectImgBtn" type="button" class="ml-1" mat-stroked-button (click)="upload.click()">
+            Select Profile Picture
+          </button>
+          <span class="ml-2" *ngIf="selectedImage">{{selectedImage.name}}</span>
+          <input #upload hidden accept="image/*" type="file" (change)="onFileChange($event)"/>
+        </div>
+        <div *ngIf="uploadProgress >= 0">
+          <div class="row">
+            <div class="col-12">
+              <mat-progress-bar mode="determinate" value="{{uploadProgress}}"></mat-progress-bar>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div>Uploading ... </div>
+            <div>Completed: {{uploadProgress}}%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-1 col-sm-3 text-right pt-3 hiddenPassword">
+        <mat-icon [style.color]="password.valid ? 'green' : 'black'" id="passwordVisibilityIcon" matSuffix (click)="passwordHidden = !passwordHidden">
+          {{passwordHidden ? 'visibility' : 'visibility_off'}}
+        </mat-icon>
+      </div>
+      <mat-form-field class="col-10 col-sm-6">
+        <input id="password"
+               [type]="passwordHidden ? 'password' : 'text'"
+               matInput
+               formControlName="password"
+               placeholder="Enter password"
+               required/>
+        <button mat-button
+                *ngIf="password.dirty && password.value.length > 0"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="resetPassword()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="password.invalid && password.hasError('required')">
+          Password is required
+        </mat-error>
+        <mat-error *ngIf="password.invalid && !password.hasError('required') && password.dirty">
+          Password should contain at least 4 characters!
+        </mat-error>
+        <mat-hint *ngIf="password.value.length === 0" class="hint">
+          Password should contain at least 4 characters!
+        </mat-hint>
+        <mat-hint *ngIf="password.valid" class="hint-success">
+          Password is valid!
+        </mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <div class="col-1 col-sm-3 text-right pt-3 hiddenPassword">
+        <mat-icon id="confirmPasswordVisibilityIcon" matSuffix
+                  (click)="confirmPasswordHidden = !confirmPasswordHidden">
+          {{confirmPasswordHidden ? 'visibility' : 'visibility_off'}}
+        </mat-icon>
+      </div>
+      <mat-form-field class="col-10 col-sm-6">
+        <input id="confirmPassword"
+               [type]="confirmPasswordHidden ? 'password' : 'text'"
+               matInput
+               formControlName="confirmPassword"
+               placeholder="Confirm password"
+               required/>
+        <button mat-button
+                *ngIf="confirmPassword.dirty && confirmPassword.value.length > 0"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="resetConfirmPassword()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="confirmPassword.hasError('required')">
+          Confirm password is required
+        </mat-error>
+        <mat-error *ngIf="password.value !== confirmPassword.value">
+          Confirm password is required ----------
+        </mat-error>
+        <mat-hint *ngIf="confirmPassword.value.length === 0" class="hint">
+          Both passwords should match!
+        </mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <div class="offset-1 offset-sm-3 col-10 col-sm-6 text-right">
+        <button type="submit" id="register-btn" class="custom-btn" mat-stroked-button>Register</button>
+      </div>
+    </div>
+  </form>
+</div>
