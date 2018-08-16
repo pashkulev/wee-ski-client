@@ -1,0 +1,14 @@
+.heading-content {
+  font-size: 1.5em;
+  border: 2px solid orange;
+  border-radius: 10px;
+  background-color: rgba(7, 44, 80, 0.8);
+  color: white;
+  /*text-align: center;*/
+}
+#courses-info-page {
+  background: url("../../../assets/inages/courses-info-background.jpg") no-repeat center fixed;
+  background-size: cover;
+  /*height: auto;*/
+
+}

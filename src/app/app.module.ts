@@ -16,6 +16,10 @@ import { LoginComponent } from './authentication/login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RegisterComponent } from './authentication/register/register.component';
 import {AuthenticationModule} from './authentication/authentication.module';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {ErrorInterceptor} from './interceptors/error.interceptor';
+import { CoursesHomeComponent } from './courses/courses-home/courses-home.component';
+import {CoursesModule} from './courses/courses.module';
 
 @NgModule({
   declarations: [
@@ -33,9 +37,16 @@ import {AuthenticationModule} from './authentication/authentication.module';
     AppRoutingModule,
     MaterialModule,
     AuthenticationModule,
+    CoursesModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

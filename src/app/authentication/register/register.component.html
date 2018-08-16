@@ -7,10 +7,7 @@
 
     <div class="row mb-5">
       <div class="col-1 col-sm-3 text-right pt-3">
-        <i class="material-icons"
-           [style.color]="firstName.value.length > 1 && firstName.valid ? 'green' : 'black'">
-          person
-        </i>
+        <i class="material-icons">person</i>
       </div>
       <mat-form-field class="col-10 col-sm-6">
         <input id="firstName"
@@ -31,7 +28,7 @@
         <mat-hint *ngIf="firstName.value.length === 0" class="hint">
            First name should start with a capital letter followed by 1 or more lowercase english letters!
         </mat-hint>
-        <mat-hint *ngIf="firstName.value.length > 1 && firstName.valid" class="hint-success">
+        <mat-hint *ngIf="firstName.value.length > 1 && firstName.valid" class="text-success">
           First name is valid!
         </mat-hint>
       </mat-form-field>
@@ -39,10 +36,7 @@
 
     <div class="row mb-5">
       <div class="col-1 col-sm-3 text-right pt-3">
-        <i class="material-icons"
-           [style.color]="lastName.value.length > 1 && lastName.valid ? 'green' : 'black'">
-          person
-        </i>
+        <i class="material-icons">person</i>
       </div>
       <mat-form-field class="col-10 col-sm-6">
         <input id="lastName"
@@ -65,7 +59,7 @@
           Last name should start with a capital letter followed by 1 or more english letters!
           (it may also contain a separating space e.g. 'Mc Kinley')
         </mat-hint>
-        <mat-hint *ngIf="lastName.value.length > 1 && lastName.valid" class="hint-success">
+        <mat-hint *ngIf="lastName.value.length > 1 && lastName.valid" class="text-success">
           Last name is valid!
         </mat-hint>
       </mat-form-field>
@@ -73,7 +67,7 @@
 
     <div class="row mb-5">
       <div class="col-1 col-sm-3 text-right pt-3">
-        <i class="material-icons" [style.color]="email.valid ? 'green' : 'black'">email</i>
+        <i class="material-icons">email</i>
       </div>
       <mat-form-field class="col-10 col-sm-6">
         <input id="email"
@@ -85,7 +79,7 @@
                 matSuffix
                 mat-icon-button
                 aria-label="Clear"
-                (click)="email.reset()">
+                (click)="resetEmail()">
           <mat-icon>close</mat-icon>
         </button>
         <mat-error *ngIf="email.invalid && email.hasError('required')">
@@ -94,7 +88,7 @@
         <mat-error *ngIf="email.invalid && !email.hasError('required') && email.dirty">
           Please enter a valid email address
         </mat-error>
-        <mat-hint *ngIf="email.valid" class="hint-success">
+        <mat-hint *ngIf="email.valid" class="text-success">
           E-mail is valid!
         </mat-hint>
       </mat-form-field>
@@ -102,7 +96,7 @@
 
     <div class="row my-3">
       <div class="col-1 col-sm-3 text-right">
-        <i class="material-icons" [style.color]="country.value ? 'green' : 'black'">public</i>
+        <i class="material-icons">public</i>
       </div>
       <mat-form-field class="col-10 col-sm-6">
         <mat-select placeholder="Select Country" panelClass="country-menu" formControlName="country">
@@ -114,7 +108,7 @@
 
     <div class="row my-4">
       <div class="col-1 col-sm-3 text-right">
-        <i class="material-icons" [style.color]="selectedImage ? 'green' : 'black'">add_a_photo</i>
+        <i class="material-icons">add_a_photo</i>
       </div>
       <div class="col-10 col-sm-6">
         <div class="mb-2">
@@ -124,7 +118,7 @@
           <span class="ml-2" *ngIf="selectedImage">{{selectedImage.name}}</span>
           <input #upload hidden accept="image/*" type="file" (change)="onFileChange($event)"/>
         </div>
-        <div *ngIf="uploadProgress >= 0">
+        <div *ngIf="selectedImage && uploadProgress >= 0">
           <div class="row">
             <div class="col-12">
               <mat-progress-bar mode="determinate" value="{{uploadProgress}}"></mat-progress-bar>
@@ -139,8 +133,8 @@
     </div>
 
     <div class="row mb-5">
-      <div class="col-1 col-sm-3 text-right pt-3 hiddenPassword">
-        <mat-icon [style.color]="password.valid ? 'green' : 'black'" id="passwordVisibilityIcon" matSuffix (click)="passwordHidden = !passwordHidden">
+      <div class="col-1 col-sm-3 text-right pt-3 passwordIcon">
+        <mat-icon id="passwordVisibilityIcon" matSuffix (click)="passwordHidden = !passwordHidden">
           {{passwordHidden ? 'visibility' : 'visibility_off'}}
         </mat-icon>
       </div>
@@ -168,15 +162,16 @@
         <mat-hint *ngIf="password.value.length === 0" class="hint">
           Password should contain at least 4 characters!
         </mat-hint>
-        <mat-hint *ngIf="password.valid" class="hint-success">
+        <mat-hint *ngIf="password.valid" class="text-success">
           Password is valid!
         </mat-hint>
       </mat-form-field>
     </div>
 
     <div class="row">
-      <div class="col-1 col-sm-3 text-right pt-3 hiddenPassword">
-        <mat-icon id="confirmPasswordVisibilityIcon" matSuffix
+      <div class="col-1 col-sm-3 text-right pt-3 passwordIcon">
+        <mat-icon id="confirmPasswordVisibilityIcon"
+                  matSuffix
                   (click)="confirmPasswordHidden = !confirmPasswordHidden">
           {{confirmPasswordHidden ? 'visibility' : 'visibility_off'}}
         </mat-icon>
@@ -199,19 +194,24 @@
         <mat-error *ngIf="confirmPassword.hasError('required')">
           Confirm password is required
         </mat-error>
-        <mat-error *ngIf="password.value !== confirmPassword.value">
-          Confirm password is required ----------
-        </mat-error>
         <mat-hint *ngIf="confirmPassword.value.length === 0" class="hint">
           Both passwords should match!
         </mat-hint>
+        <mat-hint class="text-danger" *ngIf="confirmPassword.value && confirmPassword.value !== password.value">
+          Both passwords should match!
+        </mat-hint>
+        <mat-hint *ngIf="confirmPassword.value && confirmPassword.value === password.value" class="text-success">
+          Passwords match!
+        </mat-hint>
       </mat-form-field>
+
     </div>
 
     <div class="row">
       <div class="offset-1 offset-sm-3 col-10 col-sm-6 text-right">
-        <button type="submit" id="register-btn" class="custom-btn" mat-stroked-button>Register</button>
+        <button type="submit" id="register-btn" mat-stroked-button>Register</button>
       </div>
     </div>
+
   </form>
 </div>

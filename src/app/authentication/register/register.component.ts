@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 
 import {AuthenticationService} from '../authentication.service';
 import countries from '../../data/countries';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -22,9 +23,10 @@ export class RegisterComponent {
   uploadProgress: number;
 
   constructor(private authenticationService: AuthenticationService,
+              private toastrService: ToastrService,
               private router: Router) {
     this.initForm();
-    this.countries = countries.map(country => country.name);
+    this.countries = countries.map(country => country.name).sort();
     this.passwordHidden = true;
     this.confirmPasswordHidden = true;
     this.selectedImage = null;
@@ -51,6 +53,10 @@ export class RegisterComponent {
     return this.registerForm.get("email");
   }
 
+  resetEmail() {
+    this.registerForm.controls['email'].setValue("");
+  }
+
   get country() {
     return this.registerForm.get("country");
   }
@@ -73,27 +79,45 @@ export class RegisterComponent {
 
   register() {
     if (this.registerForm.invalid) {
+      this.toastrService.info("Don't skip required fields!", "Oops");
       return;
     }
-    console.log(this.registerForm.value);
-  }
 
-  onFileChange(event) {
-    this.selectedImage = <File>event.target.files[0];
-    console.log(this.selectedImage);
-  }
-
-  onUpload() {
     const formData = new FormData();
-    formData.append("image", this.selectedImage, this.selectedImage.name);
-    this.authenticationService.uploadImage(formData)
+    formData.append("email", this.email.value);
+    formData.append("password", this.password.value);
+    formData.append("confirmPassword", this.confirmPassword.value);
+
+    if (this.firstName.value) {
+      formData.append("firstName", this.firstName.value);
+    }
+
+    if (this.lastName.value) {
+      formData.append("lastName", this.lastName.value);
+    }
+
+    if (this.country.value) {
+      formData.append("country", this.country.value);
+    }
+
+    if (this.selectedImage) {
+      formData.append("image", this.selectedImage, this.selectedImage.name);
+    }
+
+    this.authenticationService.register(formData)
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.uploadProgress = Math.round(event.loaded / event.total * 100);
         } else if (event.type === HttpEventType.Response) {
+          this.toastrService.success("Registration successful!", "Success");
           setTimeout(() => this.router.navigate(["/"]), 2000);
+          console.log(event);
         }
-    });
+      });
+  }
+
+  onFileChange(event) {
+    this.selectedImage = <File>event.target.files[0];
   }
 
   private initForm() {

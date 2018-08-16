@@ -1,12 +1,14 @@
-import {NgModule} from '@angular/core';
-import {LoginComponent} from './login/login.component';
-import {RegisterComponent} from './register/register.component';
-import {CommonModule} from '@angular/common';
-import {ReactiveFormsModule} from '@angular/forms';
-import {MaterialModule} from '../material';
-import {RouterModule} from '@angular/router';
-import {AuthenticationService} from './authentication.service';
-import {HttpClientModule} from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from '../material';
+
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+
+import { AuthenticationService } from './authentication.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,4 @@ import {HttpClientModule} from '@angular/common/http';
     AuthenticationService
   ]
 })
-export class AuthenticationModule {
-
-}
+export class AuthenticationModule {}
