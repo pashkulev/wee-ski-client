@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthenticationService} from '../authentication.service';
+import {UserLoginModel} from '../models/UserLoginModel';
+import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +15,9 @@ export class LoginComponent {
   loginForm: FormGroup;
   passwordHidden: boolean;
 
-  constructor() {
+  constructor(private authService: AuthenticationService,
+              private toastrService: ToastrService,
+              private router: Router) {
     this.loginForm = new FormGroup({
       email: new FormControl("", [
         Validators.required,
@@ -36,6 +42,13 @@ export class LoginComponent {
     if (this.loginForm.invalid) {
       return;
     }
-    console.log(this.loginForm.value);
+
+    let payload: UserLoginModel = new UserLoginModel(this.email.value, this.password.value);
+    this.authService.login(payload)
+      .subscribe(response => {
+        console.log(response);
+        this.toastrService.success("Successfully logged in!", "Success");
+        this.router.navigate(["/"])
+      });
   }
 }

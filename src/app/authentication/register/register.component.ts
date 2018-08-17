@@ -110,7 +110,7 @@ export class RegisterComponent {
           this.uploadProgress = Math.round(event.loaded / event.total * 100);
         } else if (event.type === HttpEventType.Response) {
           this.toastrService.success("Registration successful!", "Success");
-          setTimeout(() => this.router.navigate(["/"]), 2000);
+          setTimeout(() => this.router.navigate(["/login"]), 2000);
           console.log(event);
         }
       });

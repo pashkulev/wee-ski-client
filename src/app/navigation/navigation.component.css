@@ -1,8 +1,7 @@
 #navigation {
-  background: url("../../assets/inages/nav-background.jpg") round;
+  background: url("../../assets/images/nav-background.jpg") round;
   background-size: cover;
   height: auto;
-
 }
 
 #menu {
@@ -21,6 +20,22 @@
   flex: 1 1 auto;
 }
 
+.profile-picture {
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 40px;
+  height: 40px;
+}
+
+img {
+  border: 1px solid #bfbfbf;
+  border-radius: 5px;
+}
+
+img:hover {
+  opacity: 0.8;
+}
+
 /** {*/
   /*border: 1px solid black;*/
 /*}*/
@@ -31,4 +46,17 @@
 
 .menu-item:hover {
   background-color: rgba(64, 62, 230, 0.6);
+}
+
+.dropdown-menu {
+  background-color: rgba(7, 76, 130, 0.8);
+}
+
+.dropdown-item {
+  color: #d9d9d9;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(7, 76, 130, 0.9);
+  color: white;
 }

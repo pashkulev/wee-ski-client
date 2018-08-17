@@ -27,19 +27,29 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/resorts">Resorts</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item">
           <a class="nav-link" routerLink="/admin">Admin</a>
         </li>
       </ul>
 
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item mx-2 mb-1">
+        <li *ngIf="!authService.isAuthenticated()" class="nav-item mx-2 mb-1">
           <a class="nav-link btn btn-outline-success" routerLink="/login">Login</a>
         </li>
-        <li class="nav-item mx-2">
+        <li *ngIf="!authService.isAuthenticated()" class="nav-item mx-2">
           <a class="nav-link btn btn-outline-primary" routerLink="/register">Register</a>
         </li>
-
+        <li *ngIf="authService.isAuthenticated()" class="nav-item dropdown">
+          <a class="nav-link" href="#" id="navbardrop" data-toggle="dropdown">
+            <span>{{username}}</span>
+            <img class="profile-picture" src="{{image}}" alt="{{username}}"/>
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" routerLink="/profile">Your Profile</a>
+            <a class="dropdown-item" routerLink="/settings">Settings</a>
+            <a class="dropdown-item" routerLink="/logout" (click)="logout()">Logout</a>
+          </div>
+        </li>
       </ul>
     </div>
   </nav>

@@ -18,8 +18,9 @@ import {AdminComponent} from './admin/admin/admin.component';
 const routes: Routes = [
   {path: "", pathMatch: "full", component: WelcomeComponent},
   {path: "about", component: AboutComponent},
-  {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
+  {path: "login", component: LoginComponent},
+  {path: "logout", redirectTo: "/"},
   {path: "courses", loadChildren: () => CoursesModule},
   {path: "admin", component: AdminComponent, children: [
       {path: "", redirectTo: "home", pathMatch: "full"},

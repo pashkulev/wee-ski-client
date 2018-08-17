@@ -21,6 +21,8 @@ export class ErrorInterceptor implements HttpInterceptor {
         case 409:
           this.toastrService.error(err.error.message, err.error.status);
           break;
+        case 500:
+          this.toastrService.error(err.error.message, err.error.status);
 
       }
 
