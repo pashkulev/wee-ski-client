@@ -20,6 +20,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {ErrorInterceptor} from './interceptors/error.interceptor';
 import { CoursesHomeComponent } from './courses/courses-home/courses-home.component';
 import {CoursesModule} from './courses/courses.module';
+import {AdminModule} from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {CoursesModule} from './courses/courses.module';
     MaterialModule,
     AuthenticationModule,
     CoursesModule,
+    AdminModule,
     ToastrModule.forRoot()
   ],
   providers: [

@@ -1,0 +1,29 @@
+.admin-menu-item {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 15px;
+  background-color: rgba(223, 139, 20, 0.8);
+  color: white;
+  font-size: 1.3em;
+}
+
+.admin-menu-item:hover {
+  color: white;
+  background-color: rgba(7, 44, 80, 0.6);
+}
+
+.active {
+  background-color: rgba(7, 44, 80, 0.8);
+  color: white;
+}
+
+button {
+  border: 1px solid #bfbfbf;
+  font-size: 1.2em;
+  color: white;
+}
+
+button:hover {
+  color: #d6d6d6;
+}
