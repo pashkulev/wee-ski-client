@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="offset-1 offset-sm-2 col-10 col-sm-8" id="confirm-page">
+    <h4>
+      Confirm Deletion of {{collectionToSingular() | titlecase}} with id: {{entityId}}!
+    </h4>
+    <hr class="border border-white">
+    <div class="text-right">
+      <button id="cancel-btn" class="m-2" mat-stroked-button routerLink="/admin/users">Cancel</button>
+      <button id="confirm-btn" class="m-2" mat-stroked-button (click)="deleteUser()">Confirm</button>
+    </div>
+  </div>
+</div>

@@ -16,14 +16,21 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.toastrService.error(err.error.message, "Error");
           break;
         case 401:
-          this.toastrService.error(err.error ? err.error.message : err.statusText, "Error");
+          if (req.url.endsWith("/login")) {
+            this.toastrService.error("Invalid e-mail or password!", "Error")
+          } else {
+            this.toastrService.error(err.error ? err.error.message : err.statusText, "Error");
+          }
+          break;
+        case 403:
+          this.toastrService.error(err.error.message, err.error.status);
           break;
         case 409:
           this.toastrService.error(err.error.message, err.error.status);
           break;
         case 500:
           this.toastrService.error(err.error.message, err.error.status);
-
+          break;
       }
 
       return throwError(err);

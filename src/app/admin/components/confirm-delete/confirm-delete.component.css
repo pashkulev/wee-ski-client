@@ -1,0 +1,17 @@
+#confirm-page {
+  background-color: #cd4e3f;
+  color: #e0e0e0;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  padding: 20px;
+  border: 3px solid #ffffff;
+  border-radius: 15px;
+}
+
+#cancel-btn {
+  background-color: #b0b0b0;
+}
+
+#confirm-btn {
+  background-color: #b03b38;
+}

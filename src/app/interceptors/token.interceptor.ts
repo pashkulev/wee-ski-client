@@ -19,7 +19,7 @@ export class TokenInterceptor implements HttpInterceptor{
 
     return next.handle(req)
       .pipe(tap((event: HttpEvent<any>) => {
-        if (event instanceof HttpResponse && event.body.accessToken) {
+        if (event instanceof HttpResponse && event.body && event.body.accessToken) {
           this.saveToken(event.body);
         }
       }));

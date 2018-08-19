@@ -7,13 +7,14 @@ import {LoginComponent} from './authentication/login/login.component';
 import {RegisterComponent} from './authentication/register/register.component';
 import {CoursesModule} from './courses/courses.module';
 import {AdminModule} from './admin/admin.module';
-import {AdminHomeComponent} from './admin/admin-home/admin-home.component';
-import {LogsComponent} from './admin/logs/logs.component';
-import {AdminResortsComponent} from './admin/admin-resorts/admin-resorts.component';
-import {AdminUsersComponent} from './admin/admin-users/admin-users.component';
-import {AdminCoursesComponent} from './admin/admin-courses/admin-courses.component';
-import {AdminGatheringsComponent} from './admin/admin-gatherings/admin-gatherings.component';
-import {AdminComponent} from './admin/admin/admin.component';
+import {AdminHomeComponent} from './admin/components/admin-home/admin-home.component';
+import {LogsComponent} from './admin/components/logs/logs.component';
+import {AdminResortsComponent} from './admin/components/admin-resorts/admin-resorts.component';
+import {AdminUsersComponent} from './admin/components/admin-users/admin-users.component';
+import {AdminCoursesComponent} from './admin/components/admin-courses/admin-courses.component';
+import {AdminGatheringsComponent} from './admin/components/admin-gatherings/admin-gatherings.component';
+import {AdminComponent} from './admin/components/admin/admin.component';
+import {ConfirmDeleteComponent} from './admin/components/confirm-delete/confirm-delete.component';
 
 const routes: Routes = [
   {path: "", pathMatch: "full", component: WelcomeComponent},
@@ -29,7 +30,8 @@ const routes: Routes = [
       {path: "courses", component: AdminCoursesComponent},
       {path: "gatherings", component: AdminGatheringsComponent},
       {path: "resorts", component: AdminResortsComponent},
-      {path: "logs", component: LogsComponent}
+      {path: "logs", component: LogsComponent},
+      {path: ":collection/:id/delete", component: ConfirmDeleteComponent}
     ]},
   {path: "**", component: NotFoundComponent},
 ];

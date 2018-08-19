@@ -1,0 +1,52 @@
+<div>
+  <div id="logs-heading" class="row">
+    <h3 class="col-12 col-lg-3">Server Logs</h3>
+    <div class="col-12 col-lg-9 pb-2 text-right">
+      <div>
+        <span *ngIf="prevPage" class="mr-1">
+          <button mat-stroked-button (click)="loadPreviousPage()">Previous</button>
+        </span>
+        <span *ngFor="let i of pageNumbers">
+          <button class="page-number-link btn"
+                  [class.active]="i == page.number"
+                  (click)="loadPageByIndex(i)">{{i + 1}}
+          </button>
+        </span>
+        <span *ngIf="nextPage" class="ml-1">
+          <button mat-stroked-button (click)="loadNextPage()">Next</button>
+        </span>
+      </div>
+      <div *ngIf="page">
+        <span class="mr-5">Pages Count: {{page.totalPages}}</span>
+        <button class="m-2" (click)="loadPageByIndex(0)">First Page</button>
+        <button class="m-2" (click)="loadPageByIndex(page.totalPages - 1)">Last Page</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row logs-table">
+    <table *ngIf="logs" class="table table-hover ml-2">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Method</th>
+        <th>Status</th>
+        <th>Uri</th>
+        <th>Identity</th>
+        <th>TimeStamp</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let log of logs">
+        <td>{{log.id}}</td>
+        <td>{{log.requestMethod}}</td>
+        <td>{{log.statusCode}}</td>
+        <td>{{log.uri}}</td>
+        <td>{{log.identity}}</td>
+        <td>{{log.timestamp}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

@@ -5,7 +5,6 @@ import {UserModel} from './models/UserModel';
 
 const REGISTER_URL = "http://localhost:8080/api/auth/register";
 const LOGIN_URL = "http://localhost:8080/api/auth/login";
-const LOGOUT_URL = "http://localhost:8080/api/auth/logout";
 
 @Injectable()
 export class AuthenticationService {
@@ -39,6 +38,4 @@ export class AuthenticationService {
 
     return false;
   }
-
-
 }

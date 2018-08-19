@@ -31,8 +31,11 @@ export class NavigationComponent implements OnInit {
   }
 
   get image() : string {
-    return "../../assets/images/profilePictures/"
-      + JSON.parse(localStorage.getItem("currentUser")).imageUrl;
+    const imageName = JSON.parse(localStorage.getItem("currentUser")).imageUrl;
+    if (imageName) {
+      return "../../assets/images/profilePictures/" + imageName;
+    }
+    return null;
   }
 
   logout() {

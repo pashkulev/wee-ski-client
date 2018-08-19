@@ -9,7 +9,7 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatSelectModule,
-  MatProgressBarModule
+  MatProgressBarModule,
 } from '@angular/material';
 
 @NgModule({

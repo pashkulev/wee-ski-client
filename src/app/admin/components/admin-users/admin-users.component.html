@@ -1,0 +1,66 @@
+<div>
+  <div id="users-heading" class="row">
+    <h3 class="col-12 col-lg-3">Users</h3>
+    <div *ngIf="page && page.totalPages > 1" class="col-12 col-lg-9 pb-2 text-right">
+      <div>
+        <span *ngIf="prevPage" class="mr-1">
+          <button mat-stroked-button (click)="loadPreviousPage()">Previous</button>
+        </span>
+        <span *ngFor="let i of pageNumbers">
+          <button class="page-number-link btn"
+                  [class.active]="i == page.number"
+                  (click)="loadPageByIndex(i)">{{i + 1}}
+          </button>
+        </span>
+        <span *ngIf="nextPage" class="ml-1">
+          <button mat-stroked-button (click)="loadNextPage()">Next</button>
+        </span>
+      </div>
+      <div *ngIf="page">
+        <span class="mr-5">Pages Count: {{page.totalPages}}</span>
+        <button class="m-2" (click)="loadPageByIndex(0)">First Page</button>
+        <button class="m-2" (click)="loadPageByIndex(page.totalPages - 1)">Last Page</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <table *ngIf="adminUserModels" class="table table-hover logs-table">
+      <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Country</th>
+        <th>Enabled</th>
+        <th>Authorities</th>
+        <th>Admin Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of adminUserModels">
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.country}}</td>
+        <td>{{user.enabled}}</td>
+        <td>{{user.authorities.join(", ")}}</td>
+        <td>
+          <button *ngIf="!user.authorities.includes('ROLE_ADMIN')"
+                  [class.block-btn]="user.enabled"
+                  [class.unblock-btn]="!user.enabled"
+                  mat-stroked-button>
+            {{user.enabled === true ? 'Block' : 'Unblock'}}
+          </button>
+          <button *ngIf="!user.authorities.includes('ROLE_ADMIN')"
+                  class="del-btn"
+                  routerLink="/admin/users/{{user.id}}/delete"
+                  mat-stroked-button>
+            Delete
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
