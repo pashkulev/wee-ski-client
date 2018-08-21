@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {PageModel} from '../../../shared/models/page.model';
-import {AdminUserModel} from '../../models/admin-user.model';
-import {AdminUserService} from '../../service/admin-user.service';
-import {generatePageNumbers} from '../../../shared/utils/PageNumbersGenerator';
-import {ToastrService} from 'ngx-toastr';
+import { AdminUserService } from '../../services/admin-user.service';
+import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../../../authentication/authentication.service';
+
+import { PageModel } from '../../../shared/models/page.model';
+import { AdminUserModel } from '../../models/admin-user.model';
+import { AuthoritiesDataModel } from '../../models/authorities-data.model';
+
+import { generatePageNumbers } from '../../../shared/utils/PageNumbersGenerator';
 
 @Component({
   selector: 'app-admin-users',
@@ -18,14 +22,15 @@ export class AdminUsersComponent implements OnInit {
   nextPage: string;
   pageNumbers: number[];
 
-  constructor(private adminUserService: AdminUserService,
+  constructor(public authService: AuthenticationService,
+              private adminUserService: AdminUserService,
               private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.adminUserService.getUsersFirstPage()
       .subscribe(response => {
         this.setUsersState(response);
-      })
+      });
   }
 
   loadPreviousPage() {
@@ -47,10 +52,35 @@ export class AdminUsersComponent implements OnInit {
   }
 
   loadPageByIndex(index: number) {
-    let uri = `http://localhost:8080/api/users?page=${index}&size=10&sort=id,desc`;
+    debugger;
+    let uri = `http://localhost:8080/api/users?page=${index}&size=5&sort=createdAt,desc`;
     this.adminUserService.getUsers(uri)
       .subscribe(response => {
         this.setUsersState(response);
+      });
+  }
+
+  blockUser(selfLink: string) {
+    this.adminUserService.blockUser(selfLink)
+      .subscribe(response => {
+        console.log(response);
+        this.loadPageByIndex(this.page.number);
+      });
+  }
+
+  unblockUser(selfLink: string) {
+    this.adminUserService.unblockUser(selfLink)
+      .subscribe(response => {
+        console.log(response);
+        this.loadPageByIndex(this.page.number);
+      });
+  }
+
+  updateUserAuthorities(authoritiesDataModel: AuthoritiesDataModel) {
+    this.adminUserService.setUserAuthorities(authoritiesDataModel.id, authoritiesDataModel.authorities)
+      .subscribe(response => {
+        this.toastrService.success(response['message'], 'Success');
+        this.loadPageByIndex(this.page.number);
       });
   }
 
@@ -58,7 +88,7 @@ export class AdminUsersComponent implements OnInit {
     this.adminUserModels = [];
     for (let user of response['_embedded']['users']) {
       let selfLink = user['_links']['self']['href'];
-      let id = selfLink.substring(selfLink.lastIndexOf("/") + 1, selfLink.length);
+      let id = selfLink.substring(selfLink.lastIndexOf('/') + 1, selfLink.length);
       let authorities = user.roles.map(role => role.authority);
 
       let adminUserModel = new AdminUserModel(
@@ -67,9 +97,13 @@ export class AdminUsersComponent implements OnInit {
         user.lastName,
         user.email,
         user.country,
-        user.enabled === "true",
+        user.enabled === 'true',
+        user.createdAt,
+        user.updatedAt,
         selfLink,
-        authorities);
+        authorities
+      );
+
       this.adminUserModels.push(adminUserModel);
     }
 

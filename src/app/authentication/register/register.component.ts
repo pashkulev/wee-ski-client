@@ -4,7 +4,7 @@ import {HttpEventType} from '@angular/common/http';
 import {Router} from '@angular/router';
 
 import {AuthenticationService} from '../authentication.service';
-import countries from '../../data/countries';
+import countries from '../data/countries';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -80,6 +80,11 @@ export class RegisterComponent {
   register() {
     if (this.registerForm.invalid) {
       this.toastrService.info("Don't skip required fields!", "Oops");
+      return;
+    }
+
+    if (this.password.value != this.confirmPassword.value) {
+      this.toastrService.error("Passwords don't match!", "Error");
       return;
     }
 

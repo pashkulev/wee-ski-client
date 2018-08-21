@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {LogService} from '../../service/log.service';
-import {LogModel} from '../../models/log.model';
-import {PageModel} from '../../../shared/models/page.model';
-import {generatePageNumbers} from '../../../shared/utils/PageNumbersGenerator';
+import { LogService } from '../../services/log.service';
+import { LogModel } from '../../models/log.model';
+import { PageModel } from '../../../shared/models/page.model';
+import { generatePageNumbers } from '../../../shared/utils/PageNumbersGenerator';
 
 @Component({
   selector: 'app-logs',
@@ -16,8 +16,13 @@ export class LogsComponent implements OnInit {
   prevPage: string;
   nextPage: string;
   pageNumbers: number[];
+  ascending: boolean;
+  size: number;
 
-  constructor(private logService: LogService) { }
+  constructor(private logService: LogService) {
+    this.ascending = false;
+    this.size = 10;
+  }
 
   ngOnInit() {
     this.logService.getLogsFirstPage()
@@ -28,7 +33,7 @@ export class LogsComponent implements OnInit {
 
   loadPreviousPage() {
     if (this.prevPage) {
-      this.logService.getLogs(this.prevPage)
+      this.logService.getLogsByUrl(this.prevPage)
         .subscribe(response => {
           this.setLogsState(response);
         });
@@ -37,7 +42,7 @@ export class LogsComponent implements OnInit {
 
   loadNextPage() {
     if (this.nextPage) {
-      this.logService.getLogs(this.nextPage)
+      this.logService.getLogsByUrl(this.nextPage)
         .subscribe(response => {
           this.setLogsState(response);
         });
@@ -45,11 +50,38 @@ export class LogsComponent implements OnInit {
   }
 
   loadPageByIndex(index: number) {
-    let uri = `http://localhost:8080/api/logs?page=${index}&size=10&sort=id,desc`;
-    this.logService.getLogs(uri)
+    this.logService.getLogsByParameters(index, this.size, this.ascending)
       .subscribe(response => {
         this.setLogsState(response);
       });
+  }
+
+  hasNextTenResults() : boolean {
+    return Math.floor(this.page.number / 10) * 10 + 10 < this.page.totalPages;
+  }
+
+  loadNextTenResults() {
+    let pageNumber = Math.floor((this.page.number + 10) / 10) * 10;
+    this.loadPageByIndex(pageNumber);
+  }
+
+  hasPreviousTenResults() : boolean {
+    return Math.floor(this.page.number / 10) > 0;
+  }
+
+  loadPreviousTenResults() {
+    let pageNumber = Math.floor((this.page.number - 10) / 10) * 10;
+    this.loadPageByIndex(pageNumber);
+  }
+
+  toggleOrdering() {
+    this.ascending = !this.ascending;
+    this.loadPageByIndex(this.page.number);
+  }
+
+  onSizeChanged(size: number) {
+    this.size = size;
+    this.loadPageByIndex(0);
   }
 
   private setLogsState(response) {

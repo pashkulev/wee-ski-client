@@ -1,5 +1,5 @@
-<div>
-  <div id="users-heading" class="row">
+<div *ngIf="adminUserModels">
+  <div id="admin-heading" class="row">
     <h3 class="col-12 col-lg-3">Users</h3>
     <div *ngIf="page && page.totalPages > 1" class="col-12 col-lg-9 pb-2 text-right">
       <div>
@@ -18,49 +18,71 @@
       </div>
       <div *ngIf="page">
         <span class="mr-5">Pages Count: {{page.totalPages}}</span>
-        <button class="m-2" (click)="loadPageByIndex(0)">First Page</button>
-        <button class="m-2" (click)="loadPageByIndex(page.totalPages - 1)">Last Page</button>
+        <button class="m-2 page-btn" (click)="loadPageByIndex(0)">First Page</button>
+        <button class="m-2 page-btn" (click)="loadPageByIndex(page.totalPages - 1)">Last Page</button>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <table *ngIf="adminUserModels" class="table table-hover logs-table">
-      <thead>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Country</th>
-        <th>Enabled</th>
-        <th>Authorities</th>
-        <th>Admin Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let user of adminUserModels">
-        <td>{{user.firstName}}</td>
-        <td>{{user.lastName}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.country}}</td>
-        <td>{{user.enabled}}</td>
-        <td>{{user.authorities.join(", ")}}</td>
-        <td>
-          <button *ngIf="!user.authorities.includes('ROLE_ADMIN')"
-                  [class.block-btn]="user.enabled"
-                  [class.unblock-btn]="!user.enabled"
+  <div class="row p-2 m-2 user-record" *ngFor="let user of adminUserModels">
+    <div class="col-12 col-md-6 mt-1">
+      <div class="row custom-border-bottom py-1">
+        <div class="col">Email:</div>
+        <div class="col">{{user.email}}</div>
+      </div>
+      <div class="row custom-border-bottom py-1">
+        <div class="col">Country:</div>
+        <div class="col">{{user.country}}</div>
+      </div>
+      <div class="row custom-border-bottom py-1">
+        <div class="col">Enabled:</div>
+        <div class="col">{{user.enabled}}</div>
+      </div>
+      <div class="row custom-border-bottom py-1">
+        <div class="col">Created At:</div>
+        <div class="col">{{user.createdAt | localTime}}</div>
+      </div>
+      <div class="row custom-border-bottom py-1">
+        <div class="col">Updated At:</div>
+        <div class="col">{{user.updatedAt | localTime}}</div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mt-2">
+      <div class="row">
+        <div class="col">
+          <div class="mb-2">Authorities:</div>
+          <div *ngIf="!authService.hasRole('ROLE_ROOT_ADMIN')">{{user.authorities.join(", ")}}</div>
+          <app-set-authority
+            *ngIf="authService.hasRole('ROLE_ROOT_ADMIN') && !user.authorities.includes('ROLE_ROOT_ADMIN')"
+            (authorityData)="updateUserAuthorities($event)"
+            [user]="user">
+          </app-set-authority>
+          <div *ngIf="authService.hasRole('ROLE_ROOT_ADMIN') && user.authorities.includes('ROLE_ROOT_ADMIN')">
+            ROOT_ADMIN
+          </div>
+        </div>
+        <div class="col" *ngIf="!user.authorities.includes('ROLE_ROOT_ADMIN')">
+          <button *ngIf="(!user.authorities.includes('ROLE_ADMIN') || authService.hasRole('ROLE_ROOT_ADMIN')) && user.enabled"
+                  class="block-btn"
+                  (click)="blockUser(user.selfLink)"
                   mat-stroked-button>
-            {{user.enabled === true ? 'Block' : 'Unblock'}}
+            Block
           </button>
-          <button *ngIf="!user.authorities.includes('ROLE_ADMIN')"
-                  class="del-btn"
-                  routerLink="/admin/users/{{user.id}}/delete"
+          <button *ngIf="(!user.authorities.includes('ROLE_ADMIN') || authService.hasRole('ROLE_ROOT_ADMIN')) && !user.enabled"
+                  class="unblock-btn"
+                  (click)="unblockUser(user.selfLink)"
                   mat-stroked-button>
+            Unblock
+          </button>
+          <button
+            *ngIf="(!user.authorities.includes('ROLE_ADMIN') || authService.hasRole('ROLE_ROOT_ADMIN')) && !user.authorities.includes('ROLE_ROOT_ADMIN')"
+            class="del-btn"
+            routerLink="/admin/users/{{user.id}}/delete"
+            mat-stroked-button>
             Delete
           </button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

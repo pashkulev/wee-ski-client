@@ -13,7 +13,7 @@ import {AdminResortsComponent} from './admin/components/admin-resorts/admin-reso
 import {AdminUsersComponent} from './admin/components/admin-users/admin-users.component';
 import {AdminCoursesComponent} from './admin/components/admin-courses/admin-courses.component';
 import {AdminGatheringsComponent} from './admin/components/admin-gatherings/admin-gatherings.component';
-import {AdminComponent} from './admin/components/admin/admin.component';
+import {AdminRootComponent} from './admin/components/admin-root/admin-root.component';
 import {ConfirmDeleteComponent} from './admin/components/confirm-delete/confirm-delete.component';
 
 const routes: Routes = [
@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "logout", redirectTo: "/"},
   {path: "courses", loadChildren: () => CoursesModule},
-  {path: "admin", component: AdminComponent, children: [
+  {path: "admin", component: AdminRootComponent, children: [
       {path: "", redirectTo: "home", pathMatch: "full"},
       {path: "home", component: AdminHomeComponent},
       {path: "users", component: AdminUsersComponent},

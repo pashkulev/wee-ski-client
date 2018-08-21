@@ -3,6 +3,17 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
+import { ToastrModule } from 'ngx-toastr';
+import { AuthenticationModule } from './authentication/authentication.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { CoursesModule } from './courses/courses.module';
+import { AdminModule } from './admin/admin.module';
+
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
+import { LocalTimePipe } from './pipes/local-time.pipe';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -11,17 +22,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import {ToastrModule} from 'ngx-toastr';
-import { LoginComponent } from './authentication/login/login.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { RegisterComponent } from './authentication/register/register.component';
-import {AuthenticationModule} from './authentication/authentication.module';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {ErrorInterceptor} from './interceptors/error.interceptor';
-import { CoursesHomeComponent } from './courses/courses-home/courses-home.component';
-import {CoursesModule} from './courses/courses.module';
-import {AdminModule} from './admin/admin.module';
-import {TokenInterceptor} from './interceptors/token.interceptor';
+import {PipesModule} from './pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import {TokenInterceptor} from './interceptors/token.interceptor';
     WelcomeComponent,
     FooterComponent,
     AboutComponent,
-    NotFoundComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +42,7 @@ import {TokenInterceptor} from './interceptors/token.interceptor';
     MaterialModule,
     AuthenticationModule,
     CoursesModule,
+    PipesModule.forRoot(),
     AdminModule,
     ToastrModule.forRoot()
   ],

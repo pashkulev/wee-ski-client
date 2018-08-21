@@ -42,7 +42,7 @@
         <li *ngIf="authService.isAuthenticated()" class="nav-item dropdown">
           <a class="nav-link" href="#" id="navbardrop" data-toggle="dropdown">
             <span>Welcome {{username}}!</span>
-            <img *ngIf="image" class="profile-picture" src="{{image}}" alt="{{username}}"/>
+            <img *ngIf="image" class="profile-picture" [src]="image" alt="{{username}}"/>
             <span>
               <i *ngIf="!image" class="material-icons">person</i>
             </span>

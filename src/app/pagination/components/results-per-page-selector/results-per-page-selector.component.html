@@ -1,0 +1,13 @@
+<div class="mb-2">
+  <form [formGroup]="selectForm">
+    <span class="select-label">
+      Results per page:
+    </span>
+    <mat-select (selectionChange)="onChange()" formControlName="size">
+      <mat-option [value]="5">5</mat-option>
+      <mat-option [value]="10">10</mat-option>
+      <mat-option [value]="15">15</mat-option>
+      <mat-option [value]="20">20</mat-option>
+    </mat-select>
+  </form>
+</div>

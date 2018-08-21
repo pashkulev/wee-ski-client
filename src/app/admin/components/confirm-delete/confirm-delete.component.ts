@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AdminUserService} from '../../service/admin-user.service';
+import {AdminUserService} from '../../services/admin-user.service';
 import {ToastrModule, ToastrService} from 'ngx-toastr';
 import {ActivatedRoute, Router} from '@angular/router';
 

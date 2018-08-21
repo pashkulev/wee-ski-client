@@ -1,13 +1,9 @@
 #admin-menu {
-  background: #005cbf url("../../../../assets/images/admin-nav-background.png") round;
+  background: url("../../../../assets/images/admin-nav-background.png") round;
   background-size: cover;
   height: auto;
   border-right: 1px solid #6581b4;
   border-bottom: 1px solid #6581b4;
-}
-
-.menu-container {
-  /*background-color: rgba(7, 44, 80, 0.7);*/
 }
 
 .admin-menu-item {

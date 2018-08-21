@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UserLoginModel} from './models/UserLoginModel';
-import {UserModel} from './models/UserModel';
+import {AuthenticatedUserModel} from './models/AuthenticatedUserModel';
 
 const REGISTER_URL = "http://localhost:8080/api/auth/register";
 const LOGIN_URL = "http://localhost:8080/api/auth/login";
@@ -32,7 +32,7 @@ export class AuthenticationService {
 
   hasRole(role: string) : boolean {
     if (this.isAuthenticated()) {
-      let currentUser = <UserModel>JSON.parse(localStorage.getItem("currentUser"));
+      let currentUser = <AuthenticatedUserModel>JSON.parse(localStorage.getItem("currentUser"));
       return currentUser.authorities.includes(role);
     }
 

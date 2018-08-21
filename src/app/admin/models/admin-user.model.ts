@@ -6,6 +6,8 @@ export class AdminUserModel {
     public email: string,
     public country: string,
     public enabled: boolean,
+    public createdAt: string,
+    public updatedAt: string,
     public selfLink: string,
     public authorities: string[]
   ) {}

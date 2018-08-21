@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UserModel} from '../authentication/models/UserModel';
+import {AuthenticatedUserModel} from '../authentication/models/AuthenticatedUserModel';
 import {AuthenticationService} from '../authentication/authentication.service';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
@@ -14,7 +14,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class NavigationComponent implements OnInit {
 
-  currentUser: UserModel;
+  currentUser: AuthenticatedUserModel;
 
   constructor(public authService: AuthenticationService,
               private toastrService: ToastrService,
@@ -33,7 +33,7 @@ export class NavigationComponent implements OnInit {
   get image() : string {
     const imageName = JSON.parse(localStorage.getItem("currentUser")).imageUrl;
     if (imageName) {
-      return "../../assets/images/profilePictures/" + imageName;
+      return "http://localhost:8000/profilePictures/" + imageName;
     }
     return null;
   }

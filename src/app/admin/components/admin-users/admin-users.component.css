@@ -12,6 +12,10 @@ button {
   color: white;
 }
 
+.page-btn {
+  color: black;
+}
+
 .block-btn {
   background-color: #ff5e4e;
 }
@@ -22,4 +26,45 @@ button {
 
 .del-btn {
   background-color: #b03b38;
+}
+
+#admin-heading {
+  background-color: #75a8c9;
+  color: white;
+  padding: 15px 10px 0 10px;
+}
+
+.admin-table {
+  background-color: rgba(140, 194, 229, 0.8);
+}
+
+/*.page-item {*/
+/*color: #005cbf;*/
+/*}*/
+
+.page-number-link {
+  /*vertical-align: bottom;*/
+  padding: 5px 10px 5px 10px;
+  margin: 5px 3px 7px 3px;
+  background-color: #77989c;
+  color: white;
+  border: 1px solid white;
+}
+
+.page-number-link:hover {
+  background-color: #4e6569;
+}
+
+.active {
+  background-color: #0a65ad;
+}
+
+.user-record {
+  background-color: #bdd5f8;
+  border: 1px solid #072c50;
+  border-radius: 10px;
+}
+
+.custom-border-bottom {
+  border-bottom: 1px dotted #072c50;
 }

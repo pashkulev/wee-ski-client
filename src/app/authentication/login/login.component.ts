@@ -24,7 +24,8 @@ export class LoginComponent {
         Validators.pattern(/^([a-zA-Z\d]+[.\-_]?[a-zA-Z\d]+)+@([a-z]+\.)+[a-z]{2,4}$/)
       ]),
       password: new FormControl("", [
-        Validators.required
+        Validators.required,
+        Validators.minLength(4)
       ])
     });
     this.passwordHidden = true;

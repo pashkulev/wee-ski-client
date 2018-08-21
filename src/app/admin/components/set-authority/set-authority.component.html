@@ -1,0 +1,14 @@
+<div>
+  <form [formGroup]="authorityForm" (ngSubmit)="setAuthorities()">
+    <div *ngFor="let authority of authorities.controls; let i = index">
+      <mat-checkbox color="warn" [formControl]="authority">
+        {{availableAuthorities[i]}}
+      </mat-checkbox>
+    </div>
+    <button class="save-authority-btn"
+            [disabled]="!authorityForm.dirty"
+            mat-stroked-button type="submit">
+      Save Changes
+    </button>
+  </form>
+</div>

@@ -3,26 +3,29 @@ import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {Injectable} from "@angular/core";
 import {ToastrService} from "ngx-toastr";
+import {Router} from '@angular/router';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private toastrService: ToastrService) {}
+  constructor(private toastrService: ToastrService, router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError((err: HttpErrorResponse) => {
       switch (err.status) {
+        case 0:
+          this.toastrService.error("Server in not running!");
+          break;
         case 400:
           this.toastrService.error(err.error.message, "Error");
           break;
         case 401:
-          if (req.url.endsWith("/login")) {
-            this.toastrService.error("Invalid e-mail or password!", "Error")
-          } else {
-            this.toastrService.error(err.error ? err.error.message : err.statusText, "Error");
-          }
+          this.toastrService.error(err.error.message, "Error");
           break;
         case 403:
+          this.toastrService.error(err.error.message, err.error.status);
+          break;
+        case 404:
           this.toastrService.error(err.error.message, err.error.status);
           break;
         case 409:

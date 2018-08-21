@@ -2,7 +2,7 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {tap} from 'rxjs/operators';
-import {UserModel} from '../authentication/models/UserModel';
+import {AuthenticatedUserModel} from '../authentication/models/AuthenticatedUserModel';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor{
@@ -34,8 +34,8 @@ export class TokenInterceptor implements HttpInterceptor{
       username = data.user.email;
     }
 
-    let currentUser: UserModel =
-      new UserModel(
+    let currentUser: AuthenticatedUserModel =
+      new AuthenticatedUserModel(
         username,
         data.accessToken,
         data.user.profilePictureUrl,
