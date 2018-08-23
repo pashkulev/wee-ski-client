@@ -1,0 +1,30 @@
+#admin-heading {
+  background-color: #75a8c9;
+  color: white;
+  padding: 15px 10px 0 10px;
+}
+
+.admin-table {
+  background-color: rgba(140, 194, 229, 0.8);
+}
+
+#publish-btn {
+  background-color: rgba(59, 186, 93, 0.8);
+}
+
+.btn-sm {
+  color: white;
+  margin: 2px 3px 2px 3px;
+}
+
+.edit-btn {
+  background-color: #0775b3;
+}
+
+.del-btn {
+  background-color: #c90000;
+}
+
+td {
+  vertical-align: middle;
+}

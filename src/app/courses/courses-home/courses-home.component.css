@@ -1,5 +1,5 @@
 .heading-content {
-  font-size: 1.5em;
+  font-size: 1.2em;
   border: 2px solid orange;
   border-radius: 10px;
   background-color: rgba(7, 44, 80, 0.8);
@@ -9,6 +9,82 @@
 #courses-info-page {
   background: url("../../../assets/images/courses-info-background.jpg") no-repeat center fixed;
   background-size: cover;
-  /*height: auto;*/
+  padding-top: 40px;
+}
 
+.courses-side-nav {
+  background-color: rgba(160, 183, 217, 0.4);
+}
+
+.course-btn-wrapper {
+  background-color: rgba(7, 78, 125, 0.8);
+  border: 1px solid #ff9d28;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px;
+}
+
+.course-btn-wrapper:hover {
+  background-color: rgba(7, 76, 129, 0.5);
+}
+
+.course-menu-btn {
+  width: 100%;
+  color: white;
+  font-size: 1.2em;
+  border: 1px solid #a0b7d9;
+  background-color: rgba(160, 183, 217, 0.1);
+}
+
+.course-menu-btn:hover {
+  background-color: rgba(7, 78, 125, 0.7);
+}
+
+.course-img {
+  padding: 5px;
+  border: 1px solid orange;
+}
+
+.course-img-sm {
+  width: 169px;
+}
+
+.image-left {
+  margin-right: 10px;
+}
+
+.image-right {
+  margin-left: 10px;
+}
+
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.1); }
+
+#last-added-courses-heading {
+  background-color: rgba(7, 78, 125, 0.8);
+  color: white;
+  margin-top: 5px;
+  border: 1px solid #ff9d28;
+  text-align: center;
+  padding: 5px;
+  font-size: 1.2em;
+}
+
+.advert {
+  border: 1px solid #ff9d28;
+  padding: 0;
+  margin: 0;
+}
+
+.advert-img {
+  width: 100%;
+  margin-top: 10px;
+
+}
+
+.advert-data {
+  background-color: rgba(7, 78, 125, 0.8);
+  color: white;
+  /*padding: 0 5px 0 5px;*/
+  text-align: center;
 }

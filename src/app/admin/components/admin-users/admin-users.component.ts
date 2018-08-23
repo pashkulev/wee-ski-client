@@ -52,7 +52,6 @@ export class AdminUsersComponent implements OnInit {
   }
 
   loadPageByIndex(index: number) {
-    debugger;
     let uri = `http://localhost:8080/api/users?page=${index}&size=5&sort=createdAt,desc`;
     this.adminUserService.getUsers(uri)
       .subscribe(response => {

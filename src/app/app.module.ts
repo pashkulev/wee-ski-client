@@ -13,7 +13,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
-import { LocalTimePipe } from './pipes/local-time.pipe';
+import { LocalDateTimePipe } from './pipes/local-date-time.pipe';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';

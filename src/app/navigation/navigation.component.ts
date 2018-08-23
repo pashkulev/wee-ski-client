@@ -31,9 +31,9 @@ export class NavigationComponent implements OnInit {
   }
 
   get image() : string {
-    const imageName = JSON.parse(localStorage.getItem("currentUser")).imageUrl;
+    const imageName = JSON.parse(localStorage.getItem("currentUser")).profilePicture;
     if (imageName) {
-      return "http://localhost:8000/profilePictures/" + imageName;
+      return "http://localhost:8000/users/profilePictures/" + imageName;
     }
     return null;
   }

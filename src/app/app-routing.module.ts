@@ -6,7 +6,6 @@ import {NotFoundComponent} from './not-found/not-found.component';
 import {LoginComponent} from './authentication/login/login.component';
 import {RegisterComponent} from './authentication/register/register.component';
 import {CoursesModule} from './courses/courses.module';
-import {AdminModule} from './admin/admin.module';
 import {AdminHomeComponent} from './admin/components/admin-home/admin-home.component';
 import {LogsComponent} from './admin/components/logs/logs.component';
 import {AdminResortsComponent} from './admin/components/admin-resorts/admin-resorts.component';
@@ -15,6 +14,8 @@ import {AdminCoursesComponent} from './admin/components/admin-courses/admin-cour
 import {AdminGatheringsComponent} from './admin/components/admin-gatherings/admin-gatherings.component';
 import {AdminRootComponent} from './admin/components/admin-root/admin-root.component';
 import {ConfirmDeleteComponent} from './admin/components/confirm-delete/confirm-delete.component';
+import {CourseCreateComponent} from './admin/components/course-create/course-create.component';
+import {CourseEditComponent} from './admin/components/course-edit/course-edit.component';
 
 const routes: Routes = [
   {path: "", pathMatch: "full", component: WelcomeComponent},
@@ -27,7 +28,9 @@ const routes: Routes = [
       {path: "", redirectTo: "home", pathMatch: "full"},
       {path: "home", component: AdminHomeComponent},
       {path: "users", component: AdminUsersComponent},
-      {path: "courses", component: AdminCoursesComponent},
+      {path: "courses", pathMatch: "full", component: AdminCoursesComponent},
+      {path: "courses/create", component: CourseCreateComponent},
+      {path: "courses/:id/edit", component: CourseEditComponent},
       {path: "gatherings", component: AdminGatheringsComponent},
       {path: "resorts", component: AdminResortsComponent},
       {path: "logs", component: LogsComponent},

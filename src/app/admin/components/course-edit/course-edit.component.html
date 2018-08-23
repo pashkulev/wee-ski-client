@@ -1,0 +1,145 @@
+<div *ngIf="courseForm" id="course-form-page" class="row p-sm-4 p-md-5">
+  <form [formGroup]="courseForm" (ngSubmit)="publish()" class="col-12 py-2 rounded">
+
+    <div class="row mt-3">
+      <h2 class="offset-1 offset-sm-2 col-10 col-sm-8 mb-3 course-form-header">Edit Course</h2>
+    </div>
+
+    <div class="row mb-2">
+      <mat-form-field class="offset-1 offset-sm-2 col-10 col-sm-8">
+        <input id="title"
+               matInput
+               formControlName="title"
+               placeholder="Enter Course Title"/>
+        <button mat-button
+                *ngIf="title.dirty || title.value.length > 0"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="resetTitle()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="title.hasError('required')">
+          Title is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row my-3">
+      <mat-form-field class="offset-1 offset-sm-2 col-10 col-sm-8">
+        <mat-select placeholder="Select Level" panelClass="country-menu" formControlName="level">
+          <mat-option *ngFor="let level of levels" [value]="level">{{level}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="level.hasError('required')">
+          Level is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row my-3">
+      <mat-form-field class="offset-1 offset-sm-2 col-10 col-sm-8">
+        <mat-select placeholder="Select Discipline" panelClass="country-menu" formControlName="discipline">
+          <mat-option *ngFor="let discipline of disciplines" [value]="discipline">{{discipline}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="discipline.hasError('required')">
+          Discipline is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row mb-2">
+      <mat-form-field class="offset-1 offset-sm-2 col-10 col-sm-8">
+        <textarea rows="3" matInput formControlName="description" placeholder="Description"></textarea>
+        <button mat-button
+                *ngIf="description.dirty && description.value.length > 0"
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="resetDescription()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="description.invalid">
+          Description should be at least 20 characters!
+        </mat-error>
+        <mat-hint *ngIf="description.value.length === 0" class="hint">
+          Description should be at least 20 characters!
+        </mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="row mb-2">
+      <mat-form-field class="offset-1 offset-sm-2 col-10 col-sm-8">
+        <input type="number" step=".01" matInput
+               formControlName="price"
+               placeholder="Enter Course Price" required/>
+        <mat-error *ngIf="price.invalid && price.hasError('required')">
+          Price is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row mb-2">
+      <mat-form-field class="offset-1 offset-sm-2 col-10 col-sm-8">
+        <input matInput [matDatepicker]="pickerStartDate" formControlName="startDate" placeholder="Select Start Date">
+        <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #pickerStartDate></mat-datepicker>
+        <mat-error *ngIf="startDate.hasError('required')">
+          Start date is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row mb-2">
+      <mat-form-field class="offset-1 offset-sm-2 col-10 col-sm-8">
+        <input matInput
+               [matDatepicker]="pickerEndDate"
+               formControlName="endDate"
+               placeholder="Select End Date">
+        <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #pickerEndDate></mat-datepicker>
+        <mat-error *ngIf="endDate.hasError('required')">
+          End date is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="row my-4">
+      <div class="col-1 col-sm-3 text-right">
+        <i class="material-icons">add_a_photo</i>
+      </div>
+      <div class="col-10 col-sm-6">
+        <div class="mb-2">
+          <div>
+            <button id="selectImgBtn" type="button" class="ml-1" mat-stroked-button (click)="upload.click()">
+              Select Course Picture
+            </button>
+            <span class="ml-2" *ngIf="selectedImage">{{selectedImage.name}}</span>
+            <input #upload hidden accept="image/*" type="file" (change)="onFileChange($event)"/>
+          </div>
+          <mat-hint *ngIf="!selectedImage" class="hint">
+            Image is required!
+          </mat-hint>
+        </div>
+        <div *ngIf="selectedImage && uploadProgress >= 0">
+          <div class="row">
+            <div class="col-12">
+              <mat-progress-bar mode="determinate" value="{{uploadProgress}}"></mat-progress-bar>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div>Uploading ... </div>
+            <div>Completed: {{uploadProgress}}%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="offset-1 offset-sm-3 col-10 col-sm-6 text-right">
+        <button type="submit" id="register-btn" mat-stroked-button>Еdit</button>
+      </div>
+    </div>
+
+  </form>
+</div>

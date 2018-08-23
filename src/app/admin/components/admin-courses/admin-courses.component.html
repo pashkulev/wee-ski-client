@@ -1,3 +1,42 @@
-<p>
-  admin-courses works!
-</p>
+<div id="admin-heading" class="row pt-3">
+  <div class="col-6">
+    <h3>{{active ? "Upcoming Courses" : "All Courses"}}</h3>
+    <div>
+      <button class="m-2" mat-stroked-button (click)="toggleSelection()">
+        {{active ? "View All" : "View Active"}}
+      </button>
+    </div>
+  </div>
+  <div class="col-6 text-right">
+    <button id="publish-btn" routerLink="/admin/courses/create" mat-stroked-button>Publish New Course</button>
+  </div>
+</div>
+<div class="row admin-table">
+  <table *ngIf="courses" class="table table-hover ml-2">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Level</th>
+      <th>Discipline</th>
+      <th>Price</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Admin Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let course of courses | async">
+      <td>{{course.title}}</td>
+      <td>{{course.level}}</td>
+      <td>{{course.discipline}}</td>
+      <td>{{course.price}}&euro;</td>
+      <td>{{course.startDate | localDate}}</td>
+      <td>{{course.endDate | localDate}}</td>
+      <td>
+        <button routerLink="/admin/courses/{{course.id}}/edit" class="btn-sm edit-btn" mat-stroked-button>Edit</button>
+        <button routerLink="/admin/courses/{{course.id}}/delete" class="btn-sm del-btn" mat-stroked-button>Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

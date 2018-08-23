@@ -1,9 +1,9 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-  name: 'localTime'
+  name: 'localDateTime'
 })
-export class LocalTimePipe implements PipeTransform {
+export class LocalDateTimePipe implements PipeTransform {
   constructor(){}
 
   // transform(zonedDateTimeString) {

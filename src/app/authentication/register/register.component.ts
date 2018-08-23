@@ -11,7 +11,7 @@ import {ToastrService} from 'ngx-toastr';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  encapsulation: ViewEncapsulation.Emulated
+  // encapsulation: ViewEncapsulation.Emulated
 })
 export class RegisterComponent {
 

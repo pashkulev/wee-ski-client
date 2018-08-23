@@ -5,8 +5,8 @@
     </h4>
     <hr class="border border-white">
     <div class="text-right">
-      <button id="cancel-btn" class="m-2" mat-stroked-button routerLink="/admin/users">Cancel</button>
-      <button id="confirm-btn" class="m-2" mat-stroked-button (click)="deleteUser()">Confirm</button>
+      <button id="cancel-btn" class="m-2" mat-stroked-button routerLink="/admin/{{collection}}">Cancel</button>
+      <button id="confirm-btn" class="m-2" mat-stroked-button (click)="delete()">Confirm</button>
     </div>
   </div>
 </div>

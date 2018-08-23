@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import { AdminNavigationComponent } from './components/admin-navigation/admin-navigation.component';
@@ -20,6 +20,10 @@ import { AdminUserService } from './services/admin-user.service';
 import { RoleService } from './services/role.service';
 import {PipesModule} from '../pipes/pipes.module';
 import {PaginationModule} from '../pagination/pagination.module';
+import { CourseCreateComponent } from './components/course-create/course-create.component';
+import {CoursesService} from '../courses/service/courses.service';
+import {SharedDeleteService} from './services/shared-delete.service';
+import { CourseEditComponent } from './components/course-edit/course-edit.component';
 
 @NgModule({
   declarations: [
@@ -32,11 +36,14 @@ import {PaginationModule} from '../pagination/pagination.module';
     AdminUsersComponent,
     AdminRootComponent,
     ConfirmDeleteComponent,
-    SetAuthorityComponent
+    SetAuthorityComponent,
+    CourseCreateComponent,
+    CourseEditComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     ReactiveFormsModule,
     MaterialModule,
     PaginationModule,
@@ -45,7 +52,9 @@ import {PaginationModule} from '../pagination/pagination.module';
   providers: [
     AdminUserService,
     RoleService,
-    LogService
+    LogService,
+    CoursesService,
+    SharedDeleteService
   ]
 })
 export class AdminModule { }

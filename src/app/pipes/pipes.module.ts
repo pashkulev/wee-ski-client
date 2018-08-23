@@ -1,15 +1,18 @@
 import {NgModule} from '@angular/core';
 import {SafeUrlPipe} from './safe-url.pipe';
-import {LocalTimePipe} from './local-time.pipe';
+import {LocalDateTimePipe} from './local-date-time.pipe';
+import {LocalDatePipe} from './local-date.pipe';
 
 @NgModule({
   declarations: [
     SafeUrlPipe,
-    LocalTimePipe
+    LocalDateTimePipe,
+    LocalDatePipe
   ],
   exports: [
     SafeUrlPipe,
-    LocalTimePipe
+    LocalDateTimePipe,
+    LocalDatePipe
   ]
 })
 export class PipesModule {

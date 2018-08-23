@@ -38,7 +38,7 @@ export class TokenInterceptor implements HttpInterceptor{
       new AuthenticatedUserModel(
         username,
         data.accessToken,
-        data.user.profilePictureUrl,
+        data.user.profilePicture,
         data.user.authorities.map(a => a.authority));
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
   }

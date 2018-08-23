@@ -16,10 +16,6 @@ export class AdminUserService {
     return this.httpClient.get(url);
   }
 
-  deleteUser(userUrl: string) {
-    return this.httpClient.delete(userUrl);
-  }
-
   blockUser(userUrl: string) {
     return this.httpClient.patch(userUrl, {
       enabled: false

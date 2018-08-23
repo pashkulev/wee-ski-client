@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import {AdminUserService} from '../../services/admin-user.service';
-import {ToastrModule, ToastrService} from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SharedDeleteService} from '../../services/shared-delete.service';
+
+const BASE_URL = "http://localhost:8080/api/";
 
 @Component({
   selector: 'app-confirm-delete',
@@ -13,7 +15,7 @@ export class ConfirmDeleteComponent {
   collection: string;
   entityId: string;
 
-  constructor(private adminUserService: AdminUserService,
+  constructor(private sharedDeleteService: SharedDeleteService,
               private toastrService: ToastrService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
@@ -25,12 +27,17 @@ export class ConfirmDeleteComponent {
     return this.collection.substring(0, this.collection.length - 1);
   }
 
-  deleteUser() {
-    let url = `http://localhost:8080/api/${this.collection}/${this.entityId}`;
-    this.adminUserService.deleteUser(url)
+  delete() {
+    let url = `${BASE_URL}${this.collection}/${this.entityId}`;
+    this.sharedDeleteService.deleteResource(url)
       .subscribe(() => {
-        this.toastrService.info("User Deleted!", "Info");
-        this.router.navigate(['/admin/users']);
+        this.toastrService.success(`${this.toTitleCase(this.collection)} deleted!`, "Success");
+        this.router.navigate([`/admin/${this.collection}`]);
       });
+  }
+
+
+  private toTitleCase(collectionName) {
+    return collectionName[0].toUpperCase() + collectionName.substring(1, collectionName.length - 1);
   }
 }

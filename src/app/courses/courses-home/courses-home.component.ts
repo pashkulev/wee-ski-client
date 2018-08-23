@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {CoursesService} from '../service/courses.service';
+import {CourseModel} from '../../admin/models/course.model';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-courses-home',
@@ -7,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesHomeComponent implements OnInit {
 
-  constructor() { }
+  lastFiveCourses: Observable<CourseModel[]>;
+
+  constructor(private courseService: CoursesService) { }
 
   ngOnInit() {
+    this.lastFiveCourses = this.courseService.getLastThreeCourses();
   }
-
 }
