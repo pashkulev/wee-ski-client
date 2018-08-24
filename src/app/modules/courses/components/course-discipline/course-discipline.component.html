@@ -1,0 +1,30 @@
+<div class="px-3">
+  <div class="no-courses" *ngIf="(courses | async)?.length == 0">
+    <h2>Sorry, currently we don't have {{discipline | titlecase}} Courses!</h2>
+  </div>
+  <div class="mb-4" *ngFor="let course of courses | async">
+    <div class="row course-box">
+      <div class="col-12 col-md-6">
+        <a routerLink="/courses/{{course.id}}/details">
+          <img src="http://localhost:8000/courses/{{course.image}}" alt="">
+        </a>
+      </div>
+      <div class="col-12 col-md-6">
+        <div>
+          <a routerLink="/courses/{{course.id}}/details">
+            <h3 class="title">{{course.title}}</h3>
+          </a>
+        </div>
+        <div class="course-info">Level: {{course.level}}</div>
+        <div class="course-info">Starts: {{course.startDate | localDate}}</div>
+        <div class="course-info">Ends: {{course.endDate | localDate}}</div>
+        <hr class="border-light">
+        <div class="details-btn">
+          <button routerLink="/courses/{{course.id}}/details" mat-stroked-button>View Details</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,41 @@
+.course-container {
+  background-color: white;
+}
+#courses-info-page {
+  background: url("../../../../../assets/images/courses-info-background.jpg") no-repeat center fixed;
+  background-size: cover;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.courses-side-nav {
+  background-color: rgba(160, 183, 217, 0.4);
+}
+
+.course-btn-wrapper {
+  background-color: rgba(7, 78, 125, 0.8);
+  border: 1px solid #ff9d28;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px;
+}
+
+.course-btn-wrapper:hover {
+  background-color: rgba(7, 76, 129, 0.5);
+}
+
+.course-menu-btn {
+  width: 100%;
+  color: white;
+  font-size: 1.2em;
+  border: 1px solid #a0b7d9;
+  background-color: rgba(160, 183, 217, 0.1);
+}
+
+.course-menu-btn:hover {
+  background-color: rgba(7, 78, 125, 0.7);
+}
+
+.active {
+  background-color: rgba(7, 64, 98, 0.8);
+}

@@ -1,0 +1,57 @@
+.info-content {
+  font-size: 1.2em;
+  border: 2px solid orange;
+  border-radius: 10px;
+  background-color: rgba(7, 44, 80, 0.8);
+  color: white;
+  /*text-align: center;*/
+}
+
+.course-img {
+  padding: 5px;
+  border: 1px solid orange;
+}
+
+.course-img-sm {
+  width: 169px;
+}
+
+.image-left {
+  margin-right: 10px;
+}
+
+.image-right {
+  margin-left: 10px;
+}
+
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.08); }
+
+#last-added-courses-heading {
+  background-color: rgba(7, 78, 125, 0.8);
+  color: white;
+  margin-top: 5px;
+  border: 1px solid #ff9d28;
+  text-align: center;
+  padding: 5px;
+  font-size: 1.2em;
+}
+
+.advert {
+  border: 1px solid #ff9d28;
+  margin-top: 15px;
+}
+
+.advert:hover {
+  opacity: 0.9;
+}
+
+.advert-img {
+  width: 100%;
+}
+
+.advert-data {
+  background-color: rgba(7, 78, 125, 0.8);
+  color: white;
+  text-align: center;
+}

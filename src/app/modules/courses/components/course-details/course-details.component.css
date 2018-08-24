@@ -1,0 +1,60 @@
+img {
+  width: 100%;
+  border: 1px solid orange;
+  border-radius: 15px;
+  padding: 5px;
+  margin-top: 30px;
+}
+
+.details-container {
+  background-color: rgba(7, 64, 98, 0.8);
+  border-radius: 10px;
+}
+
+.details-content {
+  color: white;
+}
+
+.enum {
+  font-size: 1.4em;
+  color: #e0e0e0;
+  font-weight: bold;
+  margin: 20px;
+  text-align: center;
+}
+
+.description {
+  /*background-color: rgba(7, 64, 98, 0.7);*/
+  border: 1px solid orange;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+.dates {
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+
+.price {
+  background-color: rgba(7, 112, 182, 0.7);
+  border: 1px solid white;
+  border-radius: 10px;
+  font-size: 1.2em;
+  padding: 10px 30px 10px 30px;
+}
+
+.enroll-btn {
+  margin: 30px 0 30px 0;
+  padding: 5px;
+  font-size: 1.4em;
+}
+
+.anonymous {
+  margin: 40px 0 30px 0;
+}
+
+a {
+  color: orange;
+}

@@ -1,0 +1,23 @@
+#about-container {
+  background-color: white;
+}
+#about {
+  background: url("../../../../../assets/images/about-background.jpg") round;
+  background-size: cover;
+  height: auto;
+}
+
+#about-content {
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 15px;
+  background-color: rgba(7, 44, 80, 0.6);
+  color: white;
+}
+
+.about-header {
+  border: 1px solid black;
+  padding: 5px 30px 5px 30px;
+  border-radius: 15px;
+  color: #072c50;
+}

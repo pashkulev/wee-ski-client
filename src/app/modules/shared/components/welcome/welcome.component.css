@@ -1,0 +1,38 @@
+.jumbotron {
+  background: url("../../../../../assets/images/welcome-jumbotron-background.jpg") round;
+  height: 350px;
+
+}
+
+.welcome-heading {
+  margin-top: 10px;
+  text-align: center;
+}
+
+img {
+  border: 1px solid orange;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  width: 50%;
+}
+
+#welcome {
+  background-color: white;
+
+}
+
+.carousel-heading {
+  text-align: center;
+  background-color: #073760;
+  color: #e5e5e5;
+  padding: 5px 0 5px 0;
+  margin: 0;
+}
+
+#courses-carousel {
+  background: url("../../../../../assets/images/carousel-background.png") round;
+  height: auto;
+}
+
+

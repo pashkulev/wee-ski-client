@@ -1,0 +1,17 @@
+
+
+#admin-heading {
+  border: 1px solid black;
+  border-radius: 15px;
+  background-color: rgba(98, 245, 119, 0.8);
+  color: white;
+  padding: 5px 50px 5px 50px;
+}
+
+.admin-content {
+  background: url("../../../../../assets/images/admin-home-background.jpg") round;
+  padding-top: 21px;
+  height: 400px;
+}
+
+

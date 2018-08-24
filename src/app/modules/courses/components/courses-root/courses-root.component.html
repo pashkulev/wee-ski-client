@@ -1,0 +1,28 @@
+<div class="course-container">
+  <div id="courses-info-page" class="row">
+
+    <div class="col-12 col-md-3 courses-side-nav">
+      <div class="course-btn-wrapper">
+        <button routerLink="/courses/info" routerLinkActive="active" class="course-menu-btn" mat-stroked-button>Courses Info</button>
+      </div>
+      <div class="course-btn-wrapper">
+        <button routerLink="/courses/discipline/alpine" routerLinkActive="active" class="course-menu-btn" mat-stroked-button>Alpine</button>
+      </div>
+      <div class="course-btn-wrapper">
+        <button routerLink="/courses/discipline/freestyle" routerLinkActive="active" class="course-menu-btn" mat-stroked-button>Freestyle</button>
+      </div>
+      <div class="course-btn-wrapper">
+        <button routerLink="/courses/discipline/freeride" routerLinkActive="active" class="course-menu-btn" mat-stroked-button>Freeride</button>
+      </div>
+      <div class="course-btn-wrapper">
+        <button routerLink="/courses/discipline/tourings" routerLinkActive="active" class="course-menu-btn" mat-stroked-button>Tourings</button>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+
