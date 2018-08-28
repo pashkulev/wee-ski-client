@@ -50,4 +50,8 @@ export class CoursesService {
     return this.httpClient.get<CourseModel[]>(`${COURSES_BASE_URL}?size=3&sort=startDate,desc`)
       .pipe(map(response => response['_embedded']['courses']));
   }
+
+  enrollParticipant(courseId: string) {
+    return this.httpClient.patch(`${COURSES_BASE_URL}/${courseId}/enroll`, {});
+  }
 }

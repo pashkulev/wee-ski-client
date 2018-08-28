@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
-import {CoursesService} from '../../../courses/service/courses.service';
+import {CoursesService} from '../../../courses/services/courses.service';
 import {HttpEventType} from '@angular/common/http';
 import {Router} from '@angular/router';
 

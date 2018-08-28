@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CoursesService} from '../../service/courses.service';
+import {CoursesService} from '../../services/courses.service';
 import {CourseModel} from '../../models/course.model';
 import {Observable} from 'rxjs';
 

@@ -36,6 +36,7 @@ export class TokenInterceptor implements HttpInterceptor{
 
     let currentUser: AuthenticatedUserModel =
       new AuthenticatedUserModel(
+        data.user.id,
         username,
         data.accessToken,
         data.user.profilePicture,

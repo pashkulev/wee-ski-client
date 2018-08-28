@@ -38,4 +38,22 @@ export class AuthenticationService {
 
     return false;
   }
+
+  isAuthor(userId: string) : boolean {
+    if (this.isAuthenticated()) {
+      let currentUser = <AuthenticatedUserModel>JSON.parse(localStorage.getItem("currentUser"));
+      return currentUser.id === userId;
+    }
+
+    return false;
+  }
+
+  getUserId() : string {
+    if (this.isAuthenticated()) {
+      let currentUser = <AuthenticatedUserModel>JSON.parse(localStorage.getItem("currentUser"));
+      return currentUser.id;
+    }
+
+    return null;
+  }
 }

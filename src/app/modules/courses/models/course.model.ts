@@ -8,6 +8,7 @@ export class CourseModel {
     public price: number,
     public image: string,
     public startDate: string,
-    public endDate: string
+    public endDate: string,
+    public _embedded: Object
   ) {}
 }

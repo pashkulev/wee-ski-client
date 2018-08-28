@@ -9,6 +9,7 @@ import {CoursesModule} from '../courses/courses.module';
 import {AdminModule} from '../admin/admin.module';
 import {AdminGuard} from '../../core/guards/admin.guard';
 import {UnauthorizedComponent} from '../shared/components/unauthorized/unauthorized.component';
+import {UsersModule} from '../users/users.module';
 
 const routes: Routes = [
   {path: "", pathMatch: "full", component: WelcomeComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: "register", component: RegisterComponent},
   {path: "login", component: LoginComponent},
   {path: "logout", redirectTo: "/"},
+  {path: "users", loadChildren: () => UsersModule},
   {path: "courses", loadChildren: () => CoursesModule},
   {path: "admin", loadChildren: () => AdminModule, canActivate: [AdminGuard]},
   {path: "unauthorized", component: UnauthorizedComponent},

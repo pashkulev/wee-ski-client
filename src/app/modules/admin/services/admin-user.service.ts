@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 const USERS_URL = "http://localhost:8080/api/users?page=0&size=5&sort=createdAt,desc";
 

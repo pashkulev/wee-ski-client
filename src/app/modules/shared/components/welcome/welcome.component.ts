@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CoursesService} from '../../../courses/service/courses.service';
-import {CourseModel} from '../../../courses/models/course.model';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-welcome',
@@ -34,22 +32,13 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class WelcomeComponent implements OnInit {
 
-  furthestInTimeThreeCourses: CourseModel[];
   headingState = 'transparent';
   sloganState = 'transparent';
 
-  constructor(private coursesService: CoursesService) {
-  }
+  constructor() {}
 
   ngOnInit() {
-    this.coursesService.getFurthestInTimeThreeCourses()
-      .subscribe(response => {
-        console.log(response);
-        this.furthestInTimeThreeCourses = response;
-      });
     setTimeout(() => this.headingState = 'visible', 10);
     setTimeout(() => this.sloganState = 'visible', 1000);
-
-    // this.headingState = "visible";
   }
 }

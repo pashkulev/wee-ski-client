@@ -1,0 +1,60 @@
+#profile-settings {
+  background-color: white;
+}
+
+.register-page {
+  background: url("../../../../../assets/images/register-background.jpg") round;
+  background-size: cover;
+  height: auto;
+}
+
+.register-header {
+  text-align: center;
+  border: 1px solid #394c69;
+  background-color: rgba(8, 127, 206, 0.4);
+  padding: 10px 0 10px 0;
+  border-radius: 15px;
+}
+
+.register-header:hover {
+  background-color: rgba(8, 127, 206, 0.5);
+}
+
+form {
+  background-color: rgba(220, 220, 220, 0.9);
+}
+
+.passwordIcon {
+  cursor: pointer;
+}
+
+#register-btn {
+  margin: 10px 5px 0 5px;
+  padding: 5px 30px 5px 30px;
+  border-radius: 10px;
+  font-size: 1.3em;
+  color: #394c69;
+}
+
+#register-btn:hover {
+  background-color: rgba(8, 84, 143, 0.7);
+  color: white;
+  border: 1px solid #98b0ff;
+}
+
+.hint {
+  color: #0d90f5;
+}
+
+.country-menu .mat-select-content {
+  background-color: rgba(7, 76, 130, 0.5);
+}
+
+#selectImgBtn {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.toolbar-flex {
+  flex: 1 0.5 auto;
+}

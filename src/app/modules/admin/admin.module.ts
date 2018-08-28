@@ -21,7 +21,7 @@ import { RoleService } from './services/role.service';
 import {PipesModule} from '../../core/pipes/pipes.module';
 import {PaginationModule} from '../pagination/pagination.module';
 import { CourseCreateComponent } from './components/course-create/course-create.component';
-import {CoursesService} from '../courses/service/courses.service';
+import {CoursesService} from '../courses/services/courses.service';
 import {SharedDeleteService} from './services/shared-delete.service';
 import { CourseEditComponent } from './components/course-edit/course-edit.component';
 import {AdminRoutingModule} from './admin-routing.module';

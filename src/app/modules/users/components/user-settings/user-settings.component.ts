@@ -1,28 +1,30 @@
-import {Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {UserService} from '../../services/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {HttpEventType} from '@angular/common/http';
-import {Router} from '@angular/router';
-
-import {AuthenticationService} from '../../services/authentication.service';
+import {AuthenticationService} from '../../../authentication/services/authentication.service';
 import {ToastrService} from 'ngx-toastr';
-
+import {Router} from '@angular/router';
 import countries from '../../../shared/data/countries';
+import {HttpEventType} from '@angular/common/http';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  selector: 'app-user-settings',
+  templateUrl: './user-settings.component.html',
+  styleUrls: ['./user-settings.component.css']
 })
-export class RegisterComponent {
+export class UserSettingsComponent implements OnInit {
 
-  registerForm: FormGroup;
+
+  settingsForm: FormGroup;
   countries: string[];
+  oldPasswordHidden: boolean;
   passwordHidden: boolean;
   confirmPasswordHidden: boolean;
   selectedImage: File;
   uploadProgress: number;
 
   constructor(private authenticationService: AuthenticationService,
+              private userService: UserService,
               private toastrService: ToastrService,
               private router: Router) {
     this.initForm();
@@ -33,52 +35,55 @@ export class RegisterComponent {
     this.uploadProgress = -1;
   }
 
+  ngOnInit(): void {
+  }
+
   get firstName() {
-    return this.registerForm.get("firstName");
+    return this.settingsForm.get("firstName");
   }
 
   resetFirstName() {
-    this.registerForm.controls['firstName'].setValue("");
+    this.settingsForm.controls['firstName'].setValue("");
   }
 
   get lastName() {
-    return this.registerForm.get("lastName");
+    return this.settingsForm.get("lastName");
   }
 
   resetLastName() {
-    this.registerForm.controls['lastName'].setValue("");
+    this.settingsForm.controls['lastName'].setValue("");
   }
 
   get email() {
-    return this.registerForm.get("email");
+    return this.settingsForm.get("email");
   }
 
   resetEmail() {
-    this.registerForm.controls['email'].setValue("");
+    this.settingsForm.controls['email'].setValue("");
   }
 
   get country() {
-    return this.registerForm.get("country");
+    return this.settingsForm.get("country");
   }
 
   get password() {
-    return this.registerForm.get("password");
+    return this.settingsForm.get("password");
   }
 
   resetPassword() {
-    this.registerForm.controls['password'].setValue("");
+    this.settingsForm.controls['password'].setValue("");
   }
 
   get confirmPassword() {
-    return this.registerForm.get("confirmPassword");
+    return this.settingsForm.get("confirmPassword");
   }
 
   resetConfirmPassword() {
-    this.registerForm.controls['confirmPassword'].setValue("");
+    this.settingsForm.controls['confirmPassword'].setValue("");
   }
 
   register() {
-    if (this.registerForm.invalid) {
+    if (this.settingsForm.invalid) {
       this.toastrService.info("Don't skip required fields!", "Oops");
       return;
     }
@@ -126,7 +131,7 @@ export class RegisterComponent {
   }
 
   private initForm() {
-    this.registerForm = new FormGroup({
+    this.settingsForm = new FormGroup({
       firstName: new FormControl("", [
         Validators.pattern(/^[A-Z][a-z]+$/)
       ]),
@@ -147,4 +152,5 @@ export class RegisterComponent {
       ])
     });
   }
+
 }

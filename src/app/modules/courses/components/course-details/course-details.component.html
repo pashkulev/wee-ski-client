@@ -1,13 +1,13 @@
-<div class="details-container" *ngIf="course | async as course">
+<div class="details-container" *ngIf="course">
   <div class="row">
     <div class="offset-0 offset-md-2 col-12 col-md-8">
-      <img src="http://localhost:8000/courses/{{course.image}}" alt="">
+      <img class="course-image" src="http://localhost:8000/courses/{{course.image}}" alt="">
     </div>
   </div>
   <div class="row">
     <div class="offset-0 offset-md-2 col-12 col-md-8 details-content">
       <div>
-        <h2 class="my-2 text-center">{{course.title}}</h2>
+        <h1 class="my-4 text-center">{{course.title}}</h1>
       </div>
       <div class="enum">Level: {{course.level}}</div>
       <div class="enum">Discipline: {{course.discipline | discipline}}</div>
@@ -25,16 +25,64 @@
         <div class="col">{{course.endDate | localDate}}</div>
       </div>
 
-      <div class="text-right mt-5">
-        <span class="price">Price: {{course.price}}&euro;</span>
+      <div class="row mt-4">
+        <div class="col mt-3">Enrolled Participants: {{participantsCount}}</div>
+        <div class="col mt-3 mr-3 price">Price: {{course.price}}&euro;</div>
       </div>
-      <div *ngIf="authenticationService.isAuthenticated()" class="row">
-        <button class="col-12 enroll-btn" mat-stroked-button>Enroll</button>
+      <div *ngIf="authenticationService.isAuthenticated() && !isUserEnrolled" class="row">
+        <button (click)="enroll()" class="col mx-3 enroll-btn" mat-stroked-button>Enroll</button>
+      </div>
+      <div *ngIf="authenticationService.isAuthenticated() && isUserEnrolled" class="row">
+        <h3 class="col mx-3 px-2" id="alreadyEnrolled">You are already enrolled in this course!</h3>
       </div>
       <div class="anonymous" *ngIf="!authenticationService.isAuthenticated()">
         In order to enroll in a course you need to <a routerLink="/login">login</a>
         or if you don't have an account quickly <a routerLink="/register">register</a>
         and join our ski society!
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="course && authenticationService.isAuthenticated()" id="commentsContainer">
+  <div class="">
+    <form [formGroup]="commentForm" (ngSummit)="leaveComment()">
+      <div class="form-group row">
+        <textarea formControlName="content" rows="3" class="form-control" placeholder="Leave a comment"></textarea>
+      </div>
+      <div class="form-group row">
+        <div class="col text-right">
+          <button [hidden]="commentForm.invalid"
+                  id="commentBtn"
+                  type="submit"
+                  (click)="leaveComment()"
+                  mat-stroked-button>
+            Comment
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="row comment" *ngFor="let comment of comments">
+    <div class="col-2 user-picture-container" *ngIf="comment.author.profilePicture">
+      <img class="user-picture" src="http://localhost:8000/users/profilePictures/{{comment.author.profilePicture}}" alt="">
+    </div>
+    <div class="col-2" *ngIf="!comment.author.profilePicture">
+      <span class="text-center">
+        <i class="material-icons user-picture">person</i>
+      </span>
+    </div>
+    <div class="col-10">
+      <div>{{comment.content}}</div>
+      <div class="comment-footer">
+        <span>
+          submitted {{comment.createdAt | submitted}} ago by {{comment.author | author}}
+        </span>
+        <span class="comment-buttons" *ngIf="authenticationService.isAuthor(comment.author.id)">
+          <i class="material-icons comment-btn edit-btn" title="Edit">edit</i>
+          <i (click)="deleteComment(comment.id)" class="material-icons comment-btn del-btn" title="Delete">delete</i>
+        </span>
       </div>
     </div>
   </div>
